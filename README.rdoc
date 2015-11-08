@@ -10,6 +10,7 @@ Some of the main features are:
 * Bitcoin::Key provides a high-level API for creating and handling keys/addresses
 * Bitcoin::Builder provides a high-level API for creating transactions (and blocks)
 * Bitcoin::Litecoin implements all the litecoin-specific differences
+* Bitcoin::Gamecredits implements all the gamecredits-specific differences
 
 == Related Projects
 
