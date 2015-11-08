@@ -727,7 +727,7 @@ module Bitcoin
       magic_head: "\xfb\xc0\xb6\xdb",
       address_version: "26",
       p2sh_version: "05",
-      privkey_version: "b0",
+      privkey_version: "A6",
       extended_privkey_version: "019d9cfe",
       extended_pubkey_version: "019da462",
       default_port: 40002,
