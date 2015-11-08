@@ -115,6 +115,28 @@ describe 'Bitcoin::Protocol::Block' do
       Block.from_json(json).hash == litecoin_block.split("-").last
       Bitcoin.network = :bitcoin
     end
+	
+	it "should work with gamecredits blocks" do
+      Bitcoin.network = :gamecredits # change to gamecredits
+      gamecredits_block = "gamecredits-genesis-block-91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee"
+      Block.from_json(fixtures_file(gamecredits_block + '.json'))
+        .to_payload.should == fixtures_file(gamecredits_block + '.bin')
+
+      json = Block.new(fixtures_file(gamecredits_block + '.bin')).to_json
+      Block.from_json(json)
+        .to_payload.should == fixtures_file(gamecredits_block + '.bin')
+      Block.from_json(json).hash == gamecredits_block.split("-").last
+
+      gamecredits_block = "gamecredits-block-1ccf87ceb0d44a5eb2b221b3d0aefdbac3c3b00b2934bfbafd8af26959064883"
+      Block.from_json(fixtures_file(gamecredits_block + '.json'))
+        .to_payload.should == fixtures_file(gamecredits_block + '.bin')
+
+      json = Block.new(fixtures_file(gamecredits_block + '.bin')).to_json
+      Block.from_json(json)
+        .to_payload.should == fixtures_file(gamecredits_block + '.bin')
+      Block.from_json(json).hash == gamecredits_block.split("-").last
+      Bitcoin.network = :bitcoin
+    end
 
     it 'should check block hash' do
       block = Block.from_json(fixtures_file('rawblock-0.json'))

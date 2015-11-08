@@ -19,7 +19,8 @@ module Bitcoin
 
   autoload :Dogecoin,   'bitcoin/dogecoin'
   autoload :Litecoin,   'bitcoin/litecoin'
-
+  autoload :Gamecredits,   'bitcoin/gamecredits'
+  
   autoload :ContractHash,   'bitcoin/contracthash'
 
   module Trezor
@@ -233,7 +234,7 @@ module Bitcoin
       end
       hash.reverse.unpack("H*")[0]
     end
-
+	
     def block_scrypt_hash(prev_block, mrkl_root, time, bits, nonce, ver)
       h = "%08x%08x%08x%064s%064s%08x" %
             [nonce, bits, time, mrkl_root, prev_block, ver]
@@ -504,7 +505,7 @@ module Bitcoin
     @network
   end
 
-  [:bitcoin, :namecoin, :litecoin, :dogecoin, :dogecoin_testnet].each do |n|
+  [:bitcoin, :namecoin, :litecoin, :gamecredits, :dogecoin, :dogecoin_testnet].each do |n|
     instance_eval "def #{n}?; network_project == :#{n}; end"
   end
 
@@ -720,7 +721,45 @@ module Bitcoin
         546 => "a0fea99a6897f531600c8ae53367b126824fd6a847b2b2b73817a95b8e27e602",
       }
     })
-
+	
+  NETWORKS[:gamecredits] = NETWORKS[:bitcoin].merge({
+      project: :gamecredits,
+      magic_head: "\xfb\xc0\xb6\xdb",
+      address_version: "26",
+      p2sh_version: "05",
+      privkey_version: "b0",
+      extended_privkey_version: "019d9cfe",
+      extended_pubkey_version: "019da462",
+      default_port: 40002,
+      protocol_version: 70002,
+      max_money: 84_000_000 * COIN,
+      min_tx_fee: 100_000, # 0.001 GMC
+      min_relay_tx_fee: 100_000, # 0.001 GMC
+      free_tx_bytes: 5_000,
+      dust: CENT / 10,
+      per_dust_fee: true,
+      reward_halving: 840_000,
+      retarget_time: 90, # 90 sec
+      dns_seeds: [
+        "gamecredits.net",
+      ],
+      genesis_hash: "91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee",
+      proof_of_work_limit: 0x1e0fffff,
+      alert_pubkeys: ["0"],
+      known_nodes: [],
+      checkpoints: {
+             0 => "91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee", #Genesis
+        200000 => "de74a3c66dc0787700c0e1fdfc8f9e41e5046fe3845cb2c2d2ac668bd6636942",
+        400000 => "fef151d04ff68b9c004407d1481d446d9bab2d4d6ef2e0f59fc35b4922359d77",
+        600000 => "f5e62257c7320aad29804ff540feda6968e0b5ea554ef717c90b891a0620c184",
+        800000 => "a419226ddf647352adc2b4ff769d98b11eda8438dbb7e8a88fbed4ab763f9908",
+       1000000 => "b3d2c4dcd5fb752fc552659b69986512836d3b9ea8876e2b412330b27a404c53",
+       1050000 => "6fc07beba9589eb986584f69f8574bc4bbf27b97570511ff984b639d7de2ce70", #POST KGW
+       1096772 => "3dd493ea7be808f7fb60af5ea90d6ce4a56c34dc92affefea267d082af8b24d8", #POST KGW
+      },
+      auxpow_chain_id: 1,
+    })
+	
   NETWORKS[:dogecoin] = NETWORKS[:litecoin].merge({
       project: :dogecoin,
       magic_head: "\xc0\xc0\xc0\xc0",
