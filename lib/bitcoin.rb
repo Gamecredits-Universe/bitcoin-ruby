@@ -742,6 +742,9 @@ module Bitcoin
       retarget_time: 90, # 90 sec
       dns_seeds: [
         "gamecredits.net",
+		"5.196.20.189",
+		"45.32.1.137",
+		"104.255.67.13",
       ],
       genesis_hash: "91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee",
       proof_of_work_limit: 0x1e0fffff,
