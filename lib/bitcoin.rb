@@ -745,10 +745,14 @@ module Bitcoin
 		"5.196.20.189",
 		"45.32.1.137",
 		"104.255.67.13",
+		"dns.gmcseed1.acidpool.com",
+		"dns.gmcseed2.version2.org",
+		"gmc.cryptocloudhosting.org",
+		"gmcnode1.version2.org",
       ],
       genesis_hash: "91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee",
       proof_of_work_limit: 0x1e0fffff,
-      alert_pubkeys: ["0"],
+      alert_pubkeys: ["04fc9702847840aaf195de8442ebecedf5b095cdbb9bc716bda9110971b28a49e0ead8564ff0db22209e0374782c093bb899692d524e9d6a6956e7c5ecbcd68284"],
       known_nodes: [],
       checkpoints: {
              0 => "91ec5f25ee9a0ffa1af7d4da4db9a552228dd2dc77cdb15b738be4e1f55f30ee", #Genesis
